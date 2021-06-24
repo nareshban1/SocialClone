@@ -1,0 +1,115 @@
+.dropdown{
+    position: relative;
+    padding: 0;
+    margin: 0;
+}
+
+.dropdown_content {
+    display: none;
+    position: absolute;
+    background-color: #1a1a1b;
+    border: 1px solid #414040;
+    width: 100px;
+    border-radius: 8px;
+    z-index: 1;
+    cursor: pointer;
+    margin-top: 0;
+    right: 0;
+  }
+  
+  .droplink {
+    color: white;
+    padding: 10px 15px;
+    text-decoration: none;
+    display: block;
+    
+  }
+  
+  .dropdown_content a:hover {
+    background-color: #414040;
+    border-radius: 8px;
+  }
+  
+  .dropdown:hover .dropdown_content {
+    display: block;
+    float: right;
+  }
+  .user-menu{
+    font-size: 20px;
+  }
+  .user-menu:hover{
+    color: #FF5700;
+    
+  }
+
+  .modal-main{
+      position: fixed;
+      left:0;
+      top: 0;
+      right: 0;
+      bottom:0;
+      display: flex;
+      flex-direction: column;
+      background-color: rgba(39,39,41,0.8);
+      align-items:center;
+      justify-content: center;
+      z-index: 1;
+  }
+
+  .modal{
+      width: 50%;
+      height:50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+  }
+
+  .modal-header{
+      font-size: 20px;
+      align-self: flex-start;
+  }
+
+  .modal-body{
+      align-self: flex-start;
+  }
+
+  .modal-footer{
+      align-self: flex-end;
+  }
+
+  .confirmbtn{
+      font-size: 16px;
+      margin-right: 10px;
+      padding: 10px 20px;
+      border-radius: 8px;
+      border: 1px solid red;
+      color:red;
+      background-color: transparent;
+
+  }
+
+  .confirmbtn:hover{
+    color:white;
+    background-color: red;
+
+}
+
+  .cancelbtn{
+    font-size: 16px;
+    padding: 10px 20px;
+    border-radius: 8px;
+    border: 1px solid white;
+    color:white;
+    background-color: transparent;
+
+}
+
+.cancelbtn:hover{
+    border: 1px solid #414040;
+    color:white;
+    background-color: #414040;
+
+}
+
+  
