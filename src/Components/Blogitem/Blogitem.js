@@ -17,7 +17,7 @@ const Blogitem = (props) => {
           <div className="blog-item-header">
             <div className="blog-user">
               <div className="blog-user-detail">
-                Posted by:
+                Posted By a tori laure named:
                 <p className="blog-username">{post.displayName}</p>
                 <img className="userPic" src={post.userPic} alt=""></img>
               </div>
