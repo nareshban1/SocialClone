@@ -5,8 +5,8 @@ import Comment from "../Comment/Comment";
 import CommentForm from "../Comment/CommentForm";
 import Signin from "../Authentication/Signin";
 import { useState } from "react";
-import { MdDragHandle } from "react-icons/md";
-
+import { AiFillLike, AiFillDislike,AiOutlineShareAlt } from "react-icons/ai";
+import { BiCommentDetail} from "react-icons/bi";
 
 const Blogitem = (props) => {
 
@@ -35,7 +35,7 @@ const handleClick =() =>{
               </div>
               
             </div>
-            <p className="blogtime">{post.timestamp.toDate().toDateString()}</p>
+            <p className="blogtime">{post.timestamp? <>{post.timestamp.toDate().toDateString()}</>:<></>}</p>
             <h3>{post.caption}</h3>
           </div>
           <div>
@@ -43,19 +43,18 @@ const handleClick =() =>{
           <img className="postImage" src={post.photoURL} alt=""></img>
           </div>
           <div className="post-menu">
-            <p onClick={handleClick} className="viewcommentbtn">Comments</p>
-            <p onClick={handleClick} className="viewcommentbtn">Like Post</p>
-            <p onClick={handleClick} className="viewcommentbtn">Share</p>
+            <p  className="viewcommentbtn"><AiFillLike/></p>
+            <p onClick={handleClick} className="viewcommentbtn"><BiCommentDetail/></p>
+            <p  className="viewcommentbtn"><AiOutlineShareAlt/></p>
           </div>
-          
           <div className="commentSection">
-            
-             {view ? <><div className="postCommentSection">
-            {currentUser? <> <CommentForm id={id} /></> : <> <Signin />
-                <p className="signInPost">to Post or Comment</p></>}
+            {view ? <>
+            <div className="postCommentSection">
+            {currentUser?  
+            <CommentForm id={id} /> : <> <Signin />
+            <p className="signInPost">to Post or Comment</p></>}
             </div>
             <Comment postID={id}/></>:<></>}
-              
           </div>
         </div>
       ))}</> :<><div className="blog-item" >

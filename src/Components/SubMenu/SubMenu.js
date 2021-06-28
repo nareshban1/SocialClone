@@ -63,7 +63,7 @@ function SubMenu(props) {
                 <a  className="droplink">
                   Edit
                 </a>
-                <a onClick={openModal}  className="droplink" style={{color: "red"}}>
+                <a onClick={openModal}  className="droplink" style={{color: "crimson"}}>
                   Delete
                 </a>
                 </div>

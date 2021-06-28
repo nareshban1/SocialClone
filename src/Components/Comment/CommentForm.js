@@ -28,7 +28,7 @@ function CommentForm({ id }) {
   };
   return (
     <>
-      <form onSubmit={handleUpload}>
+      <form className="commentInputtab" onSubmit={handleUpload}>
         <div className="commentform">
           <textarea
             value={comment}
