@@ -15,7 +15,7 @@ function Profile() {
       firestore
         .collection("posts")
         .where("uid", "==", `${currentUser.uid}`)
-        .orderBy("timestamp", "desc")
+        .orderBy("timestamp", "desc").limit(10)
         .onSnapshot((snapshot) => {
           setPosts(
             snapshot.docs.map((doc) => ({

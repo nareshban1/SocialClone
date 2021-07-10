@@ -19,8 +19,10 @@ const Blogitem = ({ post, id }) => {
   const handleClick = () => {
     setView(!view);
   }
+  
   return (
-    <> <div className="blog-item" key={id}>
+    <> 
+    <div className="blog-item" key={id}>
       <div className="blog-item-header">
         <div className="blog-user">
           <div className="blog-user-detail">
