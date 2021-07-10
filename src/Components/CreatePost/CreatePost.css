@@ -1,0 +1,87 @@
+.postformsection {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  box-sizing: border-box;
+  margin-bottom: 10px;
+  color: white;
+  background-color: #1a1a1b;
+  border: 1px solid #414040;
+  border-radius: 5px;
+  font-family: "Poppins";
+}
+
+.output {
+  background-color: black;
+}
+
+.postLoggedIn {
+  width: 100%;
+}
+
+.createPostInput {
+  width: 100%;
+  background-color: #272729;
+  height: 70px;
+  box-sizing: border-box;
+  border-radius: 5px;
+  border: 1px solid #414040;
+  font-family: "Poppins";
+  color: white;
+}
+
+.createPostTitle {
+  width: 100%;
+  background-color: #272729;
+  height: 40px;
+  box-sizing: border-box;
+  border-radius: 5px;
+  font-family: "Poppins";
+  color: white;
+  margin-bottom: 10px;
+  border: 1px solid #414040;
+}
+
+#image-preview {
+  display: none;
+  height: 120px;
+  margin: 8px 0px;
+  box-sizing: border-box;
+
+  border-radius: 5px;
+}
+
+.photoicon:hover {
+  color: #ff5700;
+}
+.signInPost {
+  margin-left: 20px;
+}
+
+.imageUpload > input {
+  display: none;
+}
+
+.imageUpload {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.createPostSubmit {
+  background-color: #ff5700;
+  color: white;
+  border: #ff5700 1px solid;
+  padding: 5px 20px;
+  font-family: "Poppins";
+  font-size: 16px;
+  border-radius: 8px;
+}
+
+.createPostSubmit:hover {
+  background-color: transparent;
+  color: #ff5700;
+}

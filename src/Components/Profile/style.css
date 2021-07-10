@@ -8,6 +8,7 @@
 
 .your-posts {
   display: flex;
+  flex-direction: column;
   width: 70%;
   margin-right: 5px;
 }
@@ -27,10 +28,10 @@
 }
 
 .profile {
-    display: flex;
-flex-direction: column;
-justify-content: center;
-align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
   width: 100%;
   padding: 20px;
   box-sizing: border-box;
@@ -41,27 +42,27 @@ align-items: center;
   border-radius: 5px;
 }
 
-.profileimage{
-    border-radius: 50%;
+.profileimage {
+  border-radius: 50%;
 }
-.profilename{
-    font-size: 20px;
-    margin-top: 10px;
+.profilename {
+  font-size: 20px;
+  margin-top: 10px;
 }
-.otherinfo{
-    margin-top: 20px;
-    justify-content: center;
+.otherinfo {
+  margin-top: 20px;
+  justify-content: center;
 }
 .otherinfo > p {
-    font-size: 14px;
-    margin: 10px 0px;
+  font-size: 14px;
+  margin: 10px 0px;
 }
-.otherinfo > p > span{
-    font-size: 12px;
-    background-color:#414040;
-    padding: 5px 10px;
-    border-radius: 20px;
-    margin: 0px 0px 0px 5px;
+.otherinfo > p > span {
+  font-size: 12px;
+  background-color: #414040;
+  padding: 5px 10px;
+  border-radius: 20px;
+  margin: 0px 0px 0px 5px;
 }
 @media only screen and (max-width: 960px) {
   .main-profile {
