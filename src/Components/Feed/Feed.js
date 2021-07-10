@@ -8,15 +8,24 @@ function Feed() {
 
     useEffect(() => {
            firestore.collection("posts").orderBy('timestamp', "desc").onSnapshot((snapshot) => {
-            setPosts(snapshot.docs.map((doc) => ({
+               
+            setPosts(snapshot.docs.map((doc) => (
+                {
                 id:doc.id, post:doc.data()
             })))
 
         })
         }, [])
     return (
-        <>
-            <Blogitem props={posts}></Blogitem>
+        <>  
+            {posts.length ? <>
+                 {posts.map(({id,post}) => (
+                      <Blogitem post={post} id={id}></Blogitem>
+                 ))}
+                 </>:<> <div className="blog-item" >
+                    <div className="blog-item-content">There Are No Posts To Display</div>
+              </div></>}
+           
         </>
     )
 }

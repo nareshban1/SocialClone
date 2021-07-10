@@ -18,7 +18,6 @@ export const UserContextProvider = (props) => {
     }
 
     const logout = async () => {
-
         return await auth.signOut();
 
     }
