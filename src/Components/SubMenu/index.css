@@ -1,3 +1,5 @@
+
+
 .dropdown{
     position: relative;
     padding: 0;
@@ -83,15 +85,15 @@
       margin-right: 10px;
       padding: 10px 20px;
       border-radius: 8px;
-      border: 1px solid red;
-      color:red;
+      border: 1px solid crimson;
+      color:crimson;
       background-color: transparent;
 
   }
 
   .confirmbtn:hover{
     color:white;
-    background-color: red;
+    background-color: crimson;
 
 }
 

@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 .blog-item {
   width: 100%;
   padding: 20px;
@@ -10,7 +11,8 @@
   font-family: "Poppins";
 }
 
-.blog-item-header {
+.blog-item-header >h3 {
+  margin:5px 0px;
 }
 
 .blog-user {
@@ -56,4 +58,106 @@
   width: 100%;
   height:500px;
   border-radius: 10px;
+}
+
+.postCommentSection{
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 0px;
+  box-sizing: border-box;
+  margin-bottom: 10px;
+  color: white;
+  background-color: #1a1a1b;
+  border: 1px solid #414040;
+  border-radius: 5px;
+  font-family: 'Poppins';
+  
+}
+
+.viewcommentbtn{
+  cursor: pointer;
+  font-size: 24px;
+  
+}
+.viewcommentbtn:hover{
+  cursor: pointer;
+  color: #FF5700;
+  align-items:center;
+
+}
+
+
+.sharebtn, .commentbtn, .likebtn{
+  cursor: pointer;
+  font-size: 24px;
+  
+}
+.sharebtn:hover , .commentbtn:hover ,.likebtn:hover{
+  cursor: pointer;
+  color: #FF5700;
+  align-items:center;
+
+}
+
+.dropdown{
+  position: relative;
+  padding: 0;
+  margin: 0;
+}
+
+.dropdown_content {
+  display: none;
+  position: absolute;
+  background-color: #1a1a1b;
+  border: 1px solid #414040;
+  width: 100px;
+  border-radius: 8px;
+  z-index: 1;
+  cursor: pointer;
+  margin-top: 0;
+  right: 0;
+}
+
+.droplink {
+  color: white;
+  padding: 10px 15px;
+  text-decoration: none;
+  display: block;
+  
+}
+
+.dropdown_content a:hover {
+  background-color: #414040;
+  border-radius: 8px;
+}
+
+.dropdown:hover .dropdown_content {
+  display: block;
+  float: right;
+}
+.user-menu{
+  font-size: 20px;
+}
+.user-menu:hover{
+  color: #FF5700;
+  
+}
+
+
+
+
+.blogtime{
+  font-family: 'Poppins', sans-serif;
+  font-weight:200;
+  font-size: 12px;
+}
+
+.post-menu{
+  padding: 0px;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
