@@ -17,10 +17,11 @@
     cursor: pointer;
     margin-top: 0;
     right: 0;
+    color: red;
   }
   
   .droplink {
-    color: white;
+    
     padding: 10px 15px;
     text-decoration: none;
     display: block;

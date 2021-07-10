@@ -1,6 +1,7 @@
 import React,{useState, useEffect} from 'react'
 import { firestore } from '../../Firebase';
 import Blogitem from '../Blogitem/Blogitem'
+import "./Post.css";
 
 function Post(props) {
     const [posts, setPosts] = useState([])
@@ -13,15 +14,15 @@ function Post(props) {
         })
         }, [])
     return (
-        <>
+        <div className="postView">
         {posts.length ? <>
             {posts.map(({id,post}) => (
                  <Blogitem post={post} id={id} key={id}/>
             ))}
             </>:<> <div className="blog-item" >
-               <div className="blog-item-content">There Are No Posts To Display</div>
+               <div className="blog-item-content">Nothing to View</div>
          </div></>}
-         </>
+         </div>
     )
 }
 

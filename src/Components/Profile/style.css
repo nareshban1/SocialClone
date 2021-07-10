@@ -17,6 +17,7 @@
   color: white;
   margin-left: 5px;
   width: 30%;
+  height: fit-content;
 }
 
 .blog-list {
@@ -36,7 +37,6 @@
   padding: 20px;
   box-sizing: border-box;
   margin-bottom: 10px;
-  color: white;
   background-color: #1a1a1b;
   border: 1px solid #414040;
   border-radius: 5px;
@@ -63,6 +63,13 @@
   padding: 5px 10px;
   border-radius: 20px;
   margin: 0px 0px 0px 5px;
+}
+
+.loader{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
 }
 @media only screen and (max-width: 960px) {
   .main-profile {

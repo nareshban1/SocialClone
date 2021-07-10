@@ -4,6 +4,9 @@ import Blogitem from "../Blogitem/Blogitem";
 import "./style.css";
 import { useAuth } from "../../context/AuthContext";
 import CreatePost from "../CreatePost/CreatePost";
+import { GridLoader } from "react-spinners";
+import { css } from "@emotion/react";
+
 function Profile() {
   const [posts, setPosts] = useState([]);
   const { currentUser } = useAuth();
@@ -24,8 +27,10 @@ function Profile() {
     }
   }, [currentUser]);
 
-  console.log(posts);
-
+  const override = css`
+  display: block;
+  margin: 0 auto;
+`;
   return (
     <>
       {currentUser ? (
@@ -41,7 +46,6 @@ function Profile() {
                 </>
               ) : (
                 <>
-                  {" "}
                   <div className="blog-item">
                     <div className="blog-item-content">
                       There Are No Posts To Display
@@ -79,7 +83,7 @@ function Profile() {
           </div>
         </div>
       ) : (
-        <>LOADING</>
+        <div className="loader"><GridLoader color={"#FF5700"} css={ override }/></div>
       )}
     </>
   );

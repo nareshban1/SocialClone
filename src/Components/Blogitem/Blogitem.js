@@ -46,9 +46,6 @@ const Blogitem = ({ post, id }) => {
         <div className="viewpostbtns"><AiFillLike className="likebtn" /></div>
         <div onClick={handleClick} className="viewpostbtns" ><BiCommentDetail className="commentbtn" /></div>
         <Share id={id} />
-        <Link className="item-links" to={`/post/${id}`} >
-              Post Page
-          </Link>
       </div>
       <div className="commentSection">
         {view ? <>
