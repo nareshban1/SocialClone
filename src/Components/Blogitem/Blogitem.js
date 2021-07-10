@@ -5,11 +5,14 @@ import Comment from "../Comment/Comment";
 import CommentForm from "../Comment/CommentForm";
 import Signin from "../Authentication/Signin";
 import { useState } from "react";
-import { AiFillLike, AiFillDislike,AiOutlineShareAlt } from "react-icons/ai";
+import { AiFillLike} from "react-icons/ai";
 import { BiCommentDetail} from "react-icons/bi";
 
-const Blogitem = (props) => {
+import Share from "./Share";
 
+
+const Blogitem = ({post,id}) => {
+  
   const { currentUser } = useAuth();
   const [view, setView] = useState(false)
 
@@ -17,10 +20,7 @@ const handleClick =() =>{
   setView(!view);
 }
   return (
-    <>
-    {props.props.length ? <>
-      {props.props.map(({id,post}) => (
-        <div className="blog-item" key={id}>
+    <> <div className="blog-item" key={id}>
           <div className="blog-item-header">
             <div className="blog-user">
               <div className="blog-user-detail">
@@ -33,7 +33,7 @@ const handleClick =() =>{
               <div className="blog-user-menu">
                 { currentUser && currentUser.uid === post.uid ? <><SubMenu docid={id} post={post}  /></>:<></>}
               </div>
-              
+               
             </div>
             <p className="blogtime">{post.timestamp? <>{post.timestamp.toDate().toDateString()}</>:<></>}</p>
             <h3>{post.caption}</h3>
@@ -43,9 +43,9 @@ const handleClick =() =>{
           <img className="postImage" src={post.photoURL} alt=""></img>
           </div>
           <div className="post-menu">
-            <p  className="viewcommentbtn"><AiFillLike/></p>
-            <p onClick={handleClick} className="viewcommentbtn"><BiCommentDetail/></p>
-            <p  className="viewcommentbtn"><AiOutlineShareAlt/></p>
+            <div className="viewpostbtns"><AiFillLike className="likebtn"/></div>
+            <div onClick={handleClick} className="viewpostbtns" ><BiCommentDetail className="commentbtn"/></div>
+            <Share  id={id} />
           </div>
           <div className="commentSection">
             {view ? <>
@@ -57,9 +57,7 @@ const handleClick =() =>{
             <Comment postID={id}/></>:<></>}
           </div>
         </div>
-      ))}</> :<><div className="blog-item" >
-                    <div className="blog-item-content">There Are No Posts To Display</div>
-              </div></>}
+      
     </>
   );
 };

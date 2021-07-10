@@ -20,7 +20,7 @@ function Comment(props) {
             <>
              {comments.map(({id,comment})  => (
                     <div className="comment">
-                         <img src={comment.displayPic} className="comment-userpic"/>
+                         <img src={comment.displayPic} alt="" className="comment-userpic"/>
                     
                             <div className="comment-tab">
                                 <div className="comment-userdetails">

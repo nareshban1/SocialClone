@@ -18,7 +18,7 @@ function Profile() {
     }, [currentUser])
 
 
-
+    console.log(posts);
 
     return (
         <>
@@ -26,22 +26,28 @@ function Profile() {
                 <div className="main-profile">
                     <div className="your-posts">
                         <div className="blog-list">
-                            <Blogitem props={posts} />
+                            {posts.length ? <>
+                                {posts.map(({ id, post }) => (
+                                    <Blogitem post={post} id={id}></Blogitem>
+                                ))}
+                            </> : <> <div className="blog-item" >
+                                <div className="blog-item-content">There Are No Posts To Display</div>
+                            </div></>}
                         </div>
                     </div>
                     <div className="sideprofile">
                         <div className="profile">
-                            <img className="profileimage" src={currentUser.photoURL} alt="Profile"/>
+                            <img className="profileimage" src={currentUser.photoURL} alt="Profile" />
                             <p className="profilename">{currentUser.displayName}</p>
                             <div className="otherinfo">
-                            <p>Email<span> {currentUser.email} </span></p>
-                            <p>{currentUser.emailVerified}</p>
-                            {currentUser.phoneNumber? 
-                            <p>Phone Number<span>{currentUser.phoneNumber}</span></p> : <></>}
-                            <p>Joined Date<span>{currentUser.metadata.creationTime}</span></p>
+                                <p>Email<span> {currentUser.email} </span></p>
+                                <p>{currentUser.emailVerified}</p>
+                                {currentUser.phoneNumber ?
+                                    <p>Phone Number<span>{currentUser.phoneNumber}</span></p> : <></>}
+                                <p>Joined Date<span>{currentUser.metadata.creationTime}</span></p>
                             </div>
-                            
-                            
+
+
 
 
                         </div>

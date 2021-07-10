@@ -23,7 +23,10 @@ function Navbar(props) {
     <>
       <div className="navbar">
         <div className="navlogo">
-          <h1 className="logo">Social Clone</h1>
+        <Link className="item-links" to="/" >
+        <h1 className="logo">Social Clone</h1>
+            </Link>
+         
           <div className="togglediv">
             {showMenu ? (
               <span
