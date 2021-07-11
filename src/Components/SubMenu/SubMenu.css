@@ -1,47 +1,9 @@
 
-
-.dropdown{
-    position: relative;
-    padding: 0;
-    margin: 0;
-}
-
-.dropdown_content {
-    display: none;
-    position: absolute;
-    background-color: #1a1a1b;
-    border: 1px solid #414040;
-    width: 100px;
-    border-radius: 8px;
-    z-index: 1;
-    cursor: pointer;
-    margin-top: 0;
-    right: 0;
-    color: red;
+  .delete_icon{
+    font-size: 24px;
   }
-  
-  .droplink {
-    
-    padding: 10px 15px;
-    text-decoration: none;
-    display: block;
-    
-  }
-  
-  .dropdown_content a:hover {
-    background-color: #414040;
-    border-radius: 8px;
-  }
-  
-  .dropdown:hover .dropdown_content {
-    display: block;
-    float: right;
-  }
-  .user-menu{
-    font-size: 20px;
-  }
-  .user-menu:hover{
-    color: #FF5700;
+  .delete_icon:hover{
+    color: crimson;
     
   }
 

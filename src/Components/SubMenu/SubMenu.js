@@ -1,23 +1,42 @@
-import React,{useState} from 'react'
-import "./index.css";
-import { HiDotsHorizontal } from 'react-icons/hi';
+import React, { useState } from 'react'
+import "./SubMenu.css";
+import { AiFillDelete } from 'react-icons/ai';
 import { firestore, storage } from '../../Firebase';
 
 
 function SubMenu(props) {
     const [modal, setModal] = useState(false);
     const deletePost = () => {
-        if(props.post.photoURL){
+        if (props.post.photoURL) {
             var imageRef = storage.refFromURL(props.post.photoURL);
             imageRef.delete().then(function () {
                 console.log("deleted");
-            }).catch( function (error){
+            }).catch(function (error) {
                 console.log(error.message);
             })
         }
-        
 
+
+        deleteUnused(props.docid)
         firestore.collection("posts").doc(props.docid).delete();
+
+
+    }
+
+    const deleteUnused = async (id) => {
+        const unusedComments = await firestore.collection('comments').where("postID", "==", `${id}`).get()
+        const batch = firestore.batch();
+        unusedComments.forEach(doc => {
+            batch.delete(doc.ref);
+        });
+        await batch.commit();
+
+        const unusedLikes = await firestore.collection('likes').where("postId", "==", `${id}`).get()
+        const likebatch = firestore.batch();
+        unusedLikes.forEach(doc => {
+            likebatch.delete(doc.ref);
+        });
+        await likebatch.commit();
     }
 
     const openModal = () => {
@@ -29,27 +48,24 @@ function SubMenu(props) {
     }
 
     const Modal = () => {
-        if(!modal){
+        if (!modal) {
             return null
         }
 
-        return(
+        return (
             <div className="modal-main">
                 <div className="modal">
+                    <div className="modal-header">
+                        <p>Confirmation</p>
+                        <p>Do you wanna delete your post?</p>
+                    </div>
+                    <div className="modal-body">
 
-                
-                <div className="modal-header">
-                    <p>Confirmation</p>
-                    <p>Do you wanna delete your post?</p>
-                </div>
-                <div className="modal-body">
-            
-              
-                </div>
-                <div className="modal-footer">
-                    <button className="confirmbtn" onClick={deletePost}>Confirm Delete</button>
-                    <button className="cancelbtn " onClick={closeModal}>Cancel</button>
-                </div>
+                    </div>
+                    <div className="modal-footer">
+                        <button className="confirmbtn" onClick={deletePost}>Confirm Delete</button>
+                        <button className="cancelbtn " onClick={closeModal}>Cancel</button>
+                    </div>
                 </div>
             </div>
         )
@@ -57,21 +73,10 @@ function SubMenu(props) {
 
     return (
         <>
-        <div className="links_item dropdown">
-            <HiDotsHorizontal className="user-menu" />
-              <div className="dropdown_content">
-                <a  className="droplink">
-                  Edit
-                </a>
-                <a onClick={openModal}  className="droplink" style={{color: "crimson"}}>
-                  Delete
-                </a>
-                </div>
-            </div>
+            <AiFillDelete onClick={openModal} className="delete_icon" />
+            <Modal />
+        </>
 
-            <Modal/>
-            </>
-        
     )
 }
 

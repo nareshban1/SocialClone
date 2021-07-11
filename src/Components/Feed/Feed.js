@@ -32,7 +32,7 @@ function Feed() {
             <>
                 {posts.length ? <>
                     {posts.map(({ id, post }) => (
-                        <Blogitem post={post} id={id}></Blogitem>
+                        <Blogitem post={post} id={id} key={id}></Blogitem>
                     ))}
                 </> : <> <div className="blog-item" >
                     <div className="blog-item-content">There Are No Posts To Display</div>

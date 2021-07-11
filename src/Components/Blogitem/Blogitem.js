@@ -1,4 +1,5 @@
-import "./Blogitem.css";
+
+import React,{useEffect} from "react";
 import { useAuth } from "../../context/AuthContext";
 import SubMenu from "../SubMenu/SubMenu";
 import Comment from "../Comment/Comment";
@@ -7,19 +8,92 @@ import Signin from "../Authentication/Signin";
 import { useState } from "react";
 import { AiFillLike } from "react-icons/ai";
 import { BiCommentDetail } from "react-icons/bi";
-import { Link } from "react-router-dom";
 import Share from "./Share";
-
+import { firestore } from "../../Firebase";
+import "./Blogitem.css";
 
 const Blogitem = ({ post, id }) => {
 
   const { currentUser } = useAuth();
   const [view, setView] = useState(false)
+  const [likes,setLikes] = useState(0);
+  const [docID, setDOCID] = useState("");
+  const [liked, setLiked] = useState(false);
+
+
 
   const handleClick = () => {
     setView(!view);
   }
+
   
+
+
+  const checkLiked = async() =>{
+  const cheliked= await firestore.collection('likes').where('user' ,"==", `${currentUser.uid}`).where('postId' ,"==", `${id}`);
+  cheliked.get()
+  .then((docSnapshot) => {
+    if (docSnapshot.exists) {
+      cheliked.onSnapshot((doc) => {
+        // do stuff with the data
+      });
+    } else {
+      // create the document
+    }
+});
+  }
+  const handleLike = () => {   
+    if(liked === false){
+      console.log("liking");
+      firestore.collection("likes").add({
+        postId:id,
+        user: currentUser.uid,
+      });
+      setLiked(true);
+    }
+    else{
+        firestore.collection('likes').doc(docID).delete();
+        console.log("disliked")
+        setLiked(false);
+      
+      
+   
+  }
+   
+  }
+
+
+
+  
+
+  useEffect(() => {
+    getLikeDocs();
+    
+  }, [])
+  
+  const getLikeDocs = async () =>{
+    await firestore.collection('likes').where("postId", "==", `${id}`).onSnapshot((snapshot) => {
+      setLikes(snapshot.docs.length);
+    });
+
+    if(currentUser){
+    await firestore.collection('likes').where('user' ,"==", `${currentUser.uid}`).where('postId' ,"==", `${id}`).onSnapshot((snapshot) => {
+      if(snapshot.docs.length === 1){
+        setLiked(true);
+        setDOCID(snapshot.docs[0].id);
+        
+      }
+      else{
+        setLiked(false);
+      }
+    });
+  }
+    
+    
+
+  }
+
+
   return (
     <> 
     <div className="blog-item" key={id}>
@@ -45,7 +119,7 @@ const Blogitem = ({ post, id }) => {
         <img className="postImage" src={post.photoURL} alt=""></img>
       </div>
       <div className="post-menu">
-        <div className="viewpostbtns"><AiFillLike className="likebtn" /></div>
+        {currentUser? <div className="viewpostbtns"  onClick={handleLike} ><AiFillLike className="likebtn" style={{color: liked? "#FF5700": "white" }} /> {likes}</div> : <div className="viewpostbtns" ><AiFillLike className="likebtn" style={{color: liked? "#FF5700": "white" }} /> {likes}</div> }
         <div onClick={handleClick} className="viewpostbtns" ><BiCommentDetail className="commentbtn" /></div>
         <Share id={id} />
       </div>

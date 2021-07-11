@@ -19,7 +19,7 @@ function Comment(props) {
             {comments? 
             <>
              {comments.map(({id,comment})  => (
-                    <div className="comment">
+                    <div className="comment" key={id}>
                          <img src={comment.displayPic} alt="" className="comment-userpic"/>
                     
                             <div className="comment-tab">
