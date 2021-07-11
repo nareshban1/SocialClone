@@ -50,4 +50,16 @@ body {
   transition: all 0.50s linear;
   
 }
+
+.likebtn{
+  color:${({ theme }) => theme.text};
+  transition: all 0.3s linear;
+}
+
+.sidebar {
+  background-color: ${({ theme }) => theme.background};
+  color:${({ theme }) => theme.text};
+  transition: all 0.50s linear;
+
+}
   `

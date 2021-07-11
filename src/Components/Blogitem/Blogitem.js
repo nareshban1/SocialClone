@@ -119,7 +119,7 @@ const Blogitem = ({ post, id }) => {
         <img className="postImage" src={post.photoURL} alt=""></img>
       </div>
       <div className="post-menu">
-        {currentUser? <div className="viewpostbtns"  onClick={handleLike} ><AiFillLike className="likebtn" style={{color: liked? "#FF5700": "white" }} /> {likes}</div> : <div className="viewpostbtns" ><AiFillLike className="likebtn" style={{color: liked? "#FF5700": "white" }} /> {likes}</div> }
+        {currentUser? <div className="viewpostbtns"  onClick={handleLike} ><AiFillLike  className= {liked? "likedbtn": "likebtn" } /> {likes}</div> : <div className="viewpostbtns" ><AiFillLike  className={ liked? "likedbtn": "likebtn" } /> {likes}</div> }
         <div onClick={handleClick} className="viewpostbtns" ><BiCommentDetail className="commentbtn" /></div>
         <Share id={id} />
       </div>
