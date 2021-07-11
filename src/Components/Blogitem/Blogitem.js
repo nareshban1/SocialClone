@@ -90,8 +90,10 @@ const Blogitem = ({ post, id }) => {
         <div className="blog-user">
           <div className="blog-user-detail">
             Posted By:
-            { currentUser.uid === post.uid ? <Link className="item-links " to="/profile"><p className="blog-username">{post.displayName}</p></Link> : <Link className="item-links" to={{pathname:'userprofile/'+ post.displayName, state:post.uid}} >
-            <p className="blog-username">{post.displayName}</p></Link>  }
+            {currentUser? <>{ currentUser.uid === post.uid ? <Link className="item-links " to="/profile"><p className="blog-username">{post.displayName}</p></Link> : <Link className="item-links" to={{pathname:'userprofile/'+ post.displayName, state:post.uid}} >
+            <p className="blog-username">{post.displayName}</p></Link>  }</> :<><Link className="item-links" to={{pathname:'userprofile/'+ post.displayName, state:post.uid}} >
+            <p className="blog-username">{post.displayName}</p></Link> </>}
+            
             
             <img className="userPic" src={post.userPic} alt=""></img>
 
