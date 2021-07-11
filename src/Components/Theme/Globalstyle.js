@@ -62,4 +62,16 @@ body {
   transition: all 0.50s linear;
 
 }
+
+.displayFollowing , .followingList{
+  background-color: ${({ theme }) => theme.background};
+  color:${({ theme }) => theme.text};
+  transition: all 0.50s linear;
+}
+
+.displayFollowing:hover{
+  background-color: ${({ theme }) => theme.mainbackground};
+  color:${({ theme }) => theme.text};
+  transition: all 0.50s linear;
+}
   `
