@@ -9,7 +9,6 @@ function Logout() {
     const logoutuser =  async() => {
          await logout();
          history.push("/");
-        
     };
     
     return (

@@ -1,5 +1,6 @@
 import { firestore } from "../Firebase";
 
+
 export const fetchPost = async() => {
     const posts = new Array();
     const querySnapshot = await firestore.collection("posts").orderBy('timestamp', "desc").limit(10).get();
@@ -23,3 +24,5 @@ export const fetchMorePost = async(startAfter) => {
     });
     return {posts,lastVisible};
 }
+
+

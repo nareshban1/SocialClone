@@ -11,7 +11,7 @@ import { BiCommentDetail } from "react-icons/bi";
 import Share from "./Share";
 import { firestore } from "../../Firebase";
 import "./Blogitem.css";
-
+import { Link } from "react-router-dom";
 const Blogitem = ({ post, id }) => {
 
   const { currentUser } = useAuth();
@@ -29,19 +29,8 @@ const Blogitem = ({ post, id }) => {
   
 
 
-  const checkLiked = async() =>{
-  const cheliked= await firestore.collection('likes').where('user' ,"==", `${currentUser.uid}`).where('postId' ,"==", `${id}`);
-  cheliked.get()
-  .then((docSnapshot) => {
-    if (docSnapshot.exists) {
-      cheliked.onSnapshot((doc) => {
-        // do stuff with the data
-      });
-    } else {
-      // create the document
-    }
-});
-  }
+
+  
   const handleLike = () => {   
     if(liked === false){
       console.log("liking");
@@ -101,7 +90,9 @@ const Blogitem = ({ post, id }) => {
         <div className="blog-user">
           <div className="blog-user-detail">
             Posted By:
-            <p className="blog-username">{post.displayName}</p>
+            { currentUser.uid === post.uid ? <Link className="item-links " to="/profile"><p className="blog-username">{post.displayName}</p></Link> : <Link className="item-links" to={{pathname:'userprofile/'+ post.displayName, state:post.uid}} >
+            <p className="blog-username">{post.displayName}</p></Link>  }
+            
             <img className="userPic" src={post.userPic} alt=""></img>
 
           </div>

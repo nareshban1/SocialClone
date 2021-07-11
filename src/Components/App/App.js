@@ -9,6 +9,7 @@ import { GlobalStyles } from "../Theme/Globalstyle";
 import { lightTheme, darkTheme } from "../Theme/Theme"
 import  {useDarkMode} from "../Theme/useDarkMode"
 import Post from "../Postview/Post";
+import UserProfile from "../UserProfile/UserProfile";
 
 
 
@@ -23,11 +24,11 @@ function App() {
       <GlobalStyles/>
         <div className="App">
         <Navbar theme={theme} toggleTheme={themeToggler} />
-
           <div className="main-content-view">
             <Switch>
-              <Route  path="/" exact component={Home} />
+              <Route path="/" exact component={Home} />
               <Route path="/profile" component={Profile} />
+              <Route path="/userprofile" component={UserProfile} />
               <Route path="/post/:id" component={Post} />
             </Switch>
           </div>

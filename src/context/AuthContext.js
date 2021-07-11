@@ -13,7 +13,7 @@ export const UserContextProvider = (props) => {
 
 
     const signInGoogle = async () => {
-        return await auth.signInWithPopup(provider)
+        return await auth.signInWithPopup(provider);
 
     }
 
@@ -32,6 +32,7 @@ export const UserContextProvider = (props) => {
     useEffect(() => {
         const unsubscribe = auth.onAuthStateChanged(user => {
             setCurrentUser(user);
+            
         })
         return unsubscribe;
     }, [])
