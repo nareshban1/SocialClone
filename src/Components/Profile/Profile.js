@@ -13,6 +13,7 @@ function Profile() {
   const { currentUser } = useAuth();
   const [followers, setFollowers] = useState(0);
   const [following, setFollowing] = useState([]);
+  const [state, setstate] = useState([])
 
   useEffect(() => {
     if (currentUser) {
@@ -41,21 +42,39 @@ function Profile() {
   }
 
   const getFollowing = async () => {
+    
     await firestore.collection('follows').where("uid", "==", `${currentUser.uid}`).onSnapshot((snapshot) => {
-
-      snapshot.docs.map((doc) => {
-        firestore.collection('user').where("uid", "==", `${doc.data().followingID}`).onSnapshot((snapshot) => {
-          setFollowing(
-            snapshot.docs.map((doc) => ({
-              id: doc.id,
-              userData: doc.data(),
-            }))
-          );
-        });
-      })
+      const arr = new Array();
+        if(snapshot.empty){
+          setFollowing([]);
+        }
+        else{
+          snapshot.docs.map( async(doc)=>{
+            await firestore.collection('user').where("uid", "==", `${doc.data().followingID}`).onSnapshot((snapshot) => {
+              
+              snapshot.docs.map((doc) =>{
+                arr.push(doc.data());
+                
+                
+              });
+              setFollowing(
+                snapshot.docs.map((doc) =>(
+                  {
+                    id: doc.id
+                  }
+                ))
+                  
+              )
+              
+            })
+          })
+        }
+      
     });
   }
 
+  console.log(following.length);
+  
   const [showFollow, setShowFollow] = useState(false);
 
   const override = css`
@@ -67,6 +86,9 @@ function Profile() {
       {currentUser ? (
 
         <div className="main-profile">
+          <div>
+
+          </div>
           <div className="your-posts">
             <CreatePost />
             <div className="blog-list">
@@ -119,17 +141,19 @@ function Profile() {
             <div className={`${showFollow ? "followingList activef" : "followingList"}`}>
               <h3>Following List</h3>
               <div className="following">
-                {following ? <>{following.map(({ id, userData }) => (
-                  <Link className="displayFollowing" to={{ pathname: 'userprofile/' + userData.displayName, state: userData.uid }} key={id}>
-                    <img
-                      className="followprofileimg"
-                      src={userData.photoUrl}
-                      alt="Profile"
-                    ></img>
-                    <h4>{userData.displayName}</h4>
+                {following ? <>{following.map(({id,data}) => {
+                  console.log(data);
+                }
+                  // <Link className="displayFollowing" to={{ pathname: 'userprofile/' + data.displayName, state: data.uid }} key={data.uid}>
+                  //   <img
+                  //     className="followprofileimg"
+                  //     src={data.photoUrl}
+                  //     alt="Profile"
+                  //   ></img>
+                  //   <h4>{data.displayName}</h4>
 
-                  </Link>
-                ))} </> : <><p>You do not follow anyone.</p></>}
+                  // </Link>
+                )} </> : <><p>You do not follow anyone.</p></>}
 
               </div>
             </div>
