@@ -13,82 +13,87 @@ function Profile() {
   const { currentUser } = useAuth();
   const [followers, setFollowers] = useState(0);
   const [following, setFollowing] = useState([]);
-  const [state, setstate] = useState([])
+  const [isMounted, setIsMounted] = useState(true);
+  const [showFollow, setShowFollow] = useState(false);
 
   useEffect(() => {
+    setIsMounted(true);
     if (currentUser) {
-      firestore
-        .collection("posts")
-        .where("uid", "==", `${currentUser.uid}`)
-        .orderBy("timestamp", "desc").limit(10)
-        .onSnapshot((snapshot) => {
+      getCurrentUserPosts();
+      getFollowers();
+      getFollowing();
+
+    }
+    return () => {
+      setIsMounted(false);
+    };
+  }, [currentUser]);
+
+  const getCurrentUserPosts = async () => {
+    await firestore
+      .collection("posts")
+      .where("uid", "==", `${currentUser.uid}`)
+      .orderBy("timestamp", "desc")
+      .limit(10)
+      .onSnapshot((snapshot) => {
+        if (isMounted) {
           setPosts(
             snapshot.docs.map((doc) => ({
               id: doc.id,
               post: doc.data(),
             }))
           );
-        });
-
-      getFollowers();
-      getFollowing();
-    }
-  }, [currentUser]);
+        }
+      });
+  };
 
   const getFollowers = async () => {
-    await firestore.collection('follows').where("followingID", "==", `${currentUser.uid}`).onSnapshot((snapshot) => {
-      setFollowers(snapshot.docs.length);
-    });
-  }
+    await firestore
+      .collection("follows")
+      .where("followingID", "==", `${currentUser.uid}`)
+      .onSnapshot((snapshot) => {
+        if (isMounted) {
+          setFollowers(snapshot.docs.length);
+        }
+      });
+  };
 
   const getFollowing = async () => {
-    
-    await firestore.collection('follows').where("uid", "==", `${currentUser.uid}`).onSnapshot((snapshot) => {
-      const arr = new Array();
-        if(snapshot.empty){
-          setFollowing([]);
+    await firestore.collection("follows")
+      .where("uid", "==", `${currentUser.uid}`)
+      .onSnapshot((snapshot) => {
+        if (snapshot.empty) {
+          if (isMounted) {
+
+          }
+        } else {
+          if (isMounted) {
+            setFollowing(
+              snapshot.docs.map((doc) => ({
+                id: doc.id,
+                followingUser: doc.data(),
+              }))
+            );
+          }
         }
-        else{
-          snapshot.docs.map( async(doc)=>{
-            await firestore.collection('user').where("uid", "==", `${doc.data().followingID}`).onSnapshot((snapshot) => {
-              
-              snapshot.docs.map((doc) =>{
-                arr.push(doc.data());
-                
-                
-              });
-              setFollowing(
-                snapshot.docs.map((doc) =>(
-                  {
-                    id: doc.id
-                  }
-                ))
-                  
-              )
-              
-            })
-          })
-        }
-      
-    });
+      })
   }
 
-  console.log(following.length);
-  
-  const [showFollow, setShowFollow] = useState(false);
+
+  console.log(following)
+
+
+
 
   const override = css`
-  display: block;
-  margin: 0 auto;
-`;
+    display: block;
+    margin: 0 auto;
+  `;
   return (
     <>
       {currentUser ? (
-
         <div className="main-profile">
-          <div>
-
-          </div>
+          <div></div>
           <div className="your-posts">
             <CreatePost />
             <div className="blog-list">
@@ -135,33 +140,51 @@ function Profile() {
                 <p>
                   Followers:<span>{followers}</span>
                 </p>
-                <button className="showFollow " onClick={() => setShowFollow(!showFollow)} >Show Following</button>
+                <button
+                  className="showFollow "
+                  onClick={() => setShowFollow(!showFollow)}
+                >
+                  Show Following
+                </button>
               </div>
             </div>
-            <div className={`${showFollow ? "followingList activef" : "followingList"}`}>
+            <div
+              className={`${showFollow ? "followingList activef" : "followingList"
+                }`}
+            >
               <h3>Following List</h3>
               <div className="following">
-                {following ? <>{following.map(({id,data}) => {
-                  console.log(data);
-                }
-                  // <Link className="displayFollowing" to={{ pathname: 'userprofile/' + data.displayName, state: data.uid }} key={data.uid}>
-                  //   <img
-                  //     className="followprofileimg"
-                  //     src={data.photoUrl}
-                  //     alt="Profile"
-                  //   ></img>
-                  //   <h4>{data.displayName}</h4>
+                {following ? (
+                  <>
+                    {following.map(({ id, followingUser }) => (
+                      <Link className="displayFollowing" to={{ pathname: 'userprofile/' + followingUser.uid, state: followingUser.uid }} key={id}>
+                        <img
+                          className="followprofileimg"
+                          src={followingUser.followingUserPic}
+                          alt="Profile"
+                        ></img>
+                        <h4>{followingUser.followingUserName}</h4>
+                      </Link>
+                    ))}
 
-                  // </Link>
-                )} </> : <><p>You do not follow anyone.</p></>}
 
+
+
+
+                  </>
+                ) : (
+                  <>
+                    <p>You do not follow anyone.</p>
+                  </>
+                )}
               </div>
             </div>
           </div>
-
         </div>
       ) : (
-        <div className="loader"><GridLoader color={"#FF5700"} css={override} /></div>
+        <div className="loader">
+          <GridLoader color={"#FF5700"} css={override} />
+        </div>
       )}
     </>
   );

@@ -14,19 +14,27 @@ function UserProfile(props) {
   const [docID, setDOCID] = useState("");
   const [followers, setFollowers] = useState(0);
 
-  const changeStatus = () => {
-    if (followStatus === false) {
-      firestore.collection("follows").add({
+  const changeStatus = async() => {
+    if (followStatus === false && user) {
+      await firestore.collection("follows").add({
         followingID: props.location.state,
+        followingUserPic:user.photoUrl,
+        followingUserName:user.displayName,
         uid: currentUser.uid,
-      });
-      console.log("follow");
+      }).then(docRef => {
+        setDOCID( docRef.id);
+    });
+      console.log("following");
       setFollowStatus(true);
     } else {
+      if(docID){
       console.log("unfollow");
       console.log(docID);
-      firestore.collection("follows").doc(docID).delete();
-      setFollowStatus(false);
+      await firestore.collection("follows").doc(docID).delete().then(() =>
+        {setDOCID("");
+        setFollowStatus(false);}
+      )
+      }
     }
   };
 
@@ -34,8 +42,8 @@ function UserProfile(props) {
 
   useEffect(() => {
     let componentMounted = true;
-    const getUserData = () => {
-        firestore
+    const getUserData = async() => {
+        await firestore
         .collection("user")
         .doc(props.location.state)
         .get()
@@ -54,24 +62,26 @@ function UserProfile(props) {
     
       
     
-      const getUserPosts = () => {
-            firestore
+      const getUserPosts = async() => {
+            await firestore
             .collection("posts")
             .where("uid", "==", `${props.location.state}`)
             .orderBy("timestamp", "desc")
             .limit(10)
             .onSnapshot((snapshot) => {
+              if (componentMounted) {
               setPosts(
                 snapshot.docs.map((doc) => ({
                   id: doc.id,
                   post: doc.data(),
                 }))
               );
+              }
             });
         }
 
-        const getFollowStatus = async () => {
-            await firestore
+        const getFollowers = async () => {
+          await firestore
               .collection("follows")
               .where("followingID", "==", `${props.location.state}`)
               .onSnapshot((snapshot) => {
@@ -79,7 +89,8 @@ function UserProfile(props) {
                   setFollowers(snapshot.docs.length);
                 }
               });
-    
+        }
+        const getFollowStatus = async () => {
             if (currentUser) {
               await firestore
                 .collection("follows")
@@ -88,18 +99,23 @@ function UserProfile(props) {
                 .onSnapshot((snapshot) => {
                   if (snapshot.docs.length === 1) {
                     if (componentMounted) {
-                      setFollowStatus(true);
+                      if(snapshot.docs[0].id){
                       setDOCID(snapshot.docs[0].id);
+                      }
+                      
+
+                      setFollowStatus(true);
                     }
                   } else {
                     if (componentMounted) {
                       setFollowStatus(false);
+                      setDOCID("");
                     }
                   }
                 });
             }
           };
-
+      getFollowers();
       getUserData();
       getUserPosts();
       getFollowStatus();
@@ -107,7 +123,7 @@ function UserProfile(props) {
     return () => {
         componentMounted = false;
       };
-  }, []);
+  }, [currentUser]);
 
   const override = css`
     display: block;

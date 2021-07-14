@@ -31,12 +31,9 @@ function Comment(props) {
                             </div>
                             
                             <div className="comment-menu" >
-                            <HiDotsHorizontal />
+                                    <HiDotsHorizontal />
                             </div>
-                            
 
-                       
-                        
                     </div>
             ))}
             </> : <> </>}
