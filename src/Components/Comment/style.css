@@ -54,20 +54,7 @@
     
 }
 
-.comment-menu{
-    margin-left: 10px;
-    padding: 5px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    color:white; 
-    border-radius: 50%;
-}
 
-.comment-menu:hover{
-    color:#ff5700; 
-    background-color: #272729;
-}
 
 .comment-userpic {
   margin-right: 5px;
@@ -105,3 +92,38 @@
     font-family: 'Poppins', sans-serif;
       font-weight:200;
   }
+
+  .sidebar {
+    width: 100%;
+    padding: 20px;
+    box-sizing: border-box;
+    margin-bottom: 10px;
+    color: white;
+    background-color: #1a1a1b;
+    border: 1px solid #414040;
+    border-radius: 5px;
+  }
+  .commentmenudiv{
+    display: flex;
+    align-items: center;
+  }
+  
+  .comment-menu{
+    font-size: 24px;
+    margin-left: 10px;
+    padding: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color:white; 
+    border-radius: 50%;
+}
+
+.comment-menu:hover{
+    color:#ff5700; 
+    background-color: #272729;
+}
+
+.deleteicon:hover{
+  color: crimson;
+}

@@ -157,7 +157,7 @@ function Profile() {
                 {following ? (
                   <>
                     {following.map(({ id, followingUser }) => (
-                      <Link className="displayFollowing" to={{ pathname: 'userprofile/' + followingUser.uid, state: followingUser.uid }} key={id}>
+                      <Link className="displayFollowing" to={{ pathname: 'userprofile/'+followingUser.uid, state: followingUser.followingID }} key={id}>
                         <img
                           className="followprofileimg"
                           src={followingUser.followingUserPic}
