@@ -1,11 +1,14 @@
 import { useMain } from "../../context/MainContext";
 import { Link } from "react-router-dom";
 import "./Sidebar.css";
+import { useAuth } from "../../context/AuthContext";
 const Sidebar = () => {
   const { following } = useMain();
+  const {currentUser} = useAuth();
   return (
     <>
       <div className="sidebar">
+      {currentUser? <>
         <p>People you Follow</p>
         {following.length>0 ? <>
           {following.map(({ id, followingUser }) => (
@@ -20,8 +23,13 @@ const Sidebar = () => {
           ))}
 
         </> : <><p>You are not following anyone</p> </>}
+        </>:
+        <>
+        Login To show who you follow.
+        </>
+}
       </div>
-
+    
 
     </>
   );
