@@ -7,12 +7,13 @@ import CreatePost from "../CreatePost/CreatePost";
 import { GridLoader } from "react-spinners";
 import { css } from "@emotion/react";
 import { Link } from "react-router-dom";
+import { useMain } from "../../context/MainContext";
 
 function Profile() {
   const [posts, setPosts] = useState([]);
   const { currentUser } = useAuth();
   const [followers, setFollowers] = useState(0);
-  const [following, setFollowing] = useState([]);
+  const {following} = useMain();
   const [isMounted, setIsMounted] = useState(true);
   const [showFollow, setShowFollow] = useState(false);
 
@@ -21,7 +22,6 @@ function Profile() {
     if (currentUser) {
       getCurrentUserPosts();
       getFollowers();
-      getFollowing();
 
     }
     return () => {
@@ -58,29 +58,10 @@ function Profile() {
       });
   };
 
-  const getFollowing = async () => {
-    await firestore.collection("follows")
-      .where("uid", "==", `${currentUser.uid}`)
-      .onSnapshot((snapshot) => {
-        if (snapshot.empty) {
-          if (isMounted) {
-
-          }
-        } else {
-          if (isMounted) {
-            setFollowing(
-              snapshot.docs.map((doc) => ({
-                id: doc.id,
-                followingUser: doc.data(),
-              }))
-            );
-          }
-        }
-      })
-  }
+  
 
 
-  console.log(following)
+ 
 
 
 

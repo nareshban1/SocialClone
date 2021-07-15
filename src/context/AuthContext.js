@@ -35,7 +35,7 @@ export const UserContextProvider = (props) => {
             
         })
         return unsubscribe;
-    }, [])
+    }, [currentUser])
 
 
     return (

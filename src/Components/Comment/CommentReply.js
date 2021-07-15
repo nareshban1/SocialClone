@@ -29,15 +29,15 @@ function CommentReply({ id,setView }) {
   };
   return (
     <>
-      <form className="commentInputtab" onSubmit={handleUpload}>
-        <div className="commentform">
+      <form className="replyInputtab" onSubmit={handleUpload}>
+        <div className="replyform">
           <textarea
             value={comment}
             onChange={(e) => setComment(e.target.value)}
-            className="createComment"
+            className="createReply"
             placeholder="Your Reply"
           ></textarea>
-          <button disabled={!comment} className="commentSubmit" type="submit">
+          <button disabled={!comment} className="replySubmit" type="submit">
             Reply
           </button>
         </div>

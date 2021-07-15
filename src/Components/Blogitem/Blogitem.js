@@ -79,7 +79,7 @@ const Blogitem = ({ post, id }) => {
     return () => {
       componentMounted = false;
     };
-  }, []);
+  },);
 
   return (
     <>
@@ -174,7 +174,7 @@ const Blogitem = ({ post, id }) => {
                   </>
                 )}
               </div>
-              <Comment postID={id} />
+              <Comment postID={id}/>
             </>
           ) : (
             <></>

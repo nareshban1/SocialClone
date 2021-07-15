@@ -2,13 +2,13 @@ import React, { useState } from 'react'
 import "./style.css";
 import { AiFillDelete,  } from 'react-icons/ai';
 
-import { firestore } from '../../Firebase';
+import { firestore} from '../../Firebase';
 
 
-function CommentMenu(props) {
+function Replymenu(props) {
     const [modal, setModal] = useState(false);
     const deleteComment = () => {
-        firestore.collection("comments").doc(props.docid).delete();
+        firestore.collection("replys").doc(props.docid).delete();
 
 
     }
@@ -54,4 +54,4 @@ function CommentMenu(props) {
     )
 }
 
-export default CommentMenu
+export default Replymenu;

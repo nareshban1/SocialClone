@@ -12,7 +12,7 @@ function Post(props) {
             })))
 
         })
-        }, [])
+        }, [props.match.params.id])
     return (
         <div className="postView">
         {posts.length ? <>

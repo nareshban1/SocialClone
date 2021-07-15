@@ -10,6 +10,7 @@ import { lightTheme, darkTheme } from "../Theme/Theme"
 import  {useDarkMode} from "../Theme/useDarkMode"
 import Post from "../Postview/Post";
 import UserProfile from "../UserProfile/UserProfile";
+import { MainContextProvider } from "../../context/MainContext";
 
 
 
@@ -20,6 +21,7 @@ function App() {
   const themeMode = theme === 'light' ? lightTheme : darkTheme;
   return (
     <UserContextProvider>
+      <MainContextProvider>
       <ThemeProvider theme={themeMode}>
       <GlobalStyles/>
         <div className="App">
@@ -34,6 +36,7 @@ function App() {
           </div>
         </div>
         </ThemeProvider>
+        </MainContextProvider>
     </UserContextProvider>
         
     

@@ -7,4 +7,21 @@
   background-color: #1a1a1b;
   border: 1px solid #414040;
   border-radius: 5px;
+  min-height: 300px;
+  max-height: 500px;
+  overflow-y: overlay;
+  scrollbar-gutter: stable;
+}
+
+
+.sidebar::-webkit-scrollbar {
+  width: 2px;
+
+}
+ 
+
+ 
+.sidebar::-webkit-scrollbar-thumb {
+  background-color: #FF5700;
+  outline: 1px solid #FF5700;
 }
