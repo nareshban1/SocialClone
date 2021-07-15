@@ -7,7 +7,7 @@ const Sidebar = () => {
     <>
       <div className="sidebar">
         <p>People you Follow</p>
-        {following ? <>
+        {following.length>0 ? <>
           {following.map(({ id, followingUser }) => (
             <Link className="displayFollowing" to={{ pathname: 'userprofile/' + followingUser.uid, state: followingUser.followingID }} key={id}>
               <img

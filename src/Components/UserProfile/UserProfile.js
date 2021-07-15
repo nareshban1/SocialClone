@@ -24,12 +24,9 @@ function UserProfile(props) {
       }).then(docRef => {
         setDOCID( docRef.id);
     });
-      console.log("following");
       setFollowStatus(true);
     } else {
       if(docID){
-      console.log("unfollow");
-      console.log(docID);
       await firestore.collection("follows").doc(docID).delete().then(() =>
         {setDOCID("");
         setFollowStatus(false);}
@@ -56,7 +53,7 @@ function UserProfile(props) {
           }
         })
         .catch((error) => {
-          console.log("Error getting document:", error);
+          // console.log("Error getting document:", error);
         });
       }
     

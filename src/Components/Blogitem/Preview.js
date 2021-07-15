@@ -1,7 +1,6 @@
 import React from 'react'
 import "./Blogitem.css";
 function Preview(props) {
-  console.log(props);
   return (
     <div className="blog-item">
       <div className="blog-item-header">

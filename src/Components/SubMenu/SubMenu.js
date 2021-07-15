@@ -10,9 +10,9 @@ function SubMenu(props) {
         if (props.post.photoURL) {
             var imageRef = storage.refFromURL(props.post.photoURL);
             imageRef.delete().then(function () {
-                console.log("deleted");
+                // console.log("deleted");
             }).catch(function (error) {
-                console.log(error.message);
+                // console.log(error.message);
             })
         }
 

@@ -41,7 +41,7 @@ function CreatePost() {
             },
             (err) => {
               setError(err);
-              console.log(error);
+              // console.log(error);
             },
             async () => {
               await storageRef.getDownloadURL().then((imageUrl) => {
