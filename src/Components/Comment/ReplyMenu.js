@@ -7,11 +7,13 @@ import { firestore} from '../../Firebase';
 
 function Replymenu(props) {
     const [modal, setModal] = useState(false);
-    const deleteReply = () => {
+    const [loading, setLoading]=useState(false);
+    
+    const deleteReply = async () => {
+        setLoading(true);
         console.log("deleting");
-        firestore.collection("replys").doc(props.docid).delete();
-
-
+        await firestore.collection("replys").doc(props.docid).delete();
+        setLoading(false);
     }
 
     const openModal = () => {
@@ -32,13 +34,14 @@ function Replymenu(props) {
                 <div className="modal">
                     <div className="modal-header">
                         <p>Confirmation</p>
-                        <p>Do you wanna delete your comment?</p>
+                        <p>Do you wanna delete your reply?</p>
                     </div>
                     <div className="modal-body">
 
                     </div>
                     <div className="modal-footer">
-                        <button className="confirmbtn" onClick={deleteReply}>Confirm Delete</button>
+                        {loading? <><button className="confirmbtn" >Deleting</button> </> :<> <button className="confirmbtn" onClick={deleteReply}>Confirm Delete</button> </>}
+                        
                         <button className="cancelbtn " onClick={closeModal}>Cancel</button>
                     </div>
                 </div>
