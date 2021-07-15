@@ -8,9 +8,19 @@ import { firestore } from '../../Firebase';
 function CommentMenu(props) {
     const [modal, setModal] = useState(false);
     const deleteComment = () => {
+        deleteUnused(props.docid)
         firestore.collection("comments").doc(props.docid).delete();
 
 
+    }
+
+    const deleteUnused = async (id) => {
+        const unusedReplys = await firestore.collection('replys').where("commentID", "==", `${id}`).get()
+        const batch = firestore.batch();
+        unusedReplys.forEach(doc => {
+            batch.delete(doc.ref);
+        });
+        await batch.commit();
     }
 
     const openModal = () => {
