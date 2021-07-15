@@ -14,16 +14,23 @@ function CommentTabs({ id, comment }) {
   const [replys, setReplys] = useState([]);
 
     useEffect(() => {
+      let componentMounted = true;
         firestore
           .collection("replys").where("commentID","==",`${id}`)
           .onSnapshot((snapshot) => {
-            setReplys(
+            if (componentMounted) {
+              setReplys(
                 snapshot.docs.map((doc) => ({
                   id: doc.id,
                   reply: doc.data(),
                 }))
               );
+            }
+            
           });
+          return () => {
+            componentMounted = false;
+          };
       }, );
     
 

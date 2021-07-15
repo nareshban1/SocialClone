@@ -7,7 +7,8 @@ import { firestore} from '../../Firebase';
 
 function Replymenu(props) {
     const [modal, setModal] = useState(false);
-    const deleteComment = () => {
+    const deleteReply = () => {
+        console.log("deleting");
         firestore.collection("replys").doc(props.docid).delete();
 
 
@@ -37,7 +38,7 @@ function Replymenu(props) {
 
                     </div>
                     <div className="modal-footer">
-                        <button className="confirmbtn" onClick={deleteComment}>Confirm Delete</button>
+                        <button className="confirmbtn" onClick={deleteReply}>Confirm Delete</button>
                         <button className="cancelbtn " onClick={closeModal}>Cancel</button>
                     </div>
                 </div>
