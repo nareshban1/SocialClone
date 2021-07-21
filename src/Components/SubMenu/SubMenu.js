@@ -38,7 +38,7 @@ function SubMenu(props) {
         });
         await likebatch.commit();
 
-        const unusedReplys = await firestore.collection('replys').where("postId", "==", `${id}`).get()
+        const unusedReplys = await firestore.collection('replys').where("postID", "==", `${id}`).get()
         const replybatch = firestore.batch();
         unusedReplys.forEach(doc => {
             replybatch.delete(doc.ref);
