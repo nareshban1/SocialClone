@@ -23,11 +23,7 @@ function CreatePost() {
         const inputerr ={};
         let isValid = true;
 
-        if(caption == "a"){
-          inputerr.captionNull = "Caption required"
-          isValid=false;
-        } 
-
+     
         if(caption.trim().length < 10 && caption.trim().length > 0){
           inputerr.captionShort = "Caption is too short, should be more than 10 characters"
           isValid=false;
