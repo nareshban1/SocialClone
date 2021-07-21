@@ -5,12 +5,14 @@ import "./style.css";
 
 function Comment(props) {
   const [comments, setComments] = useState([]);
+  
+
 
   useEffect(() => {
     let componentMounted = true;
     firestore
       .collection("comments")
-      .where("postID", "==", `${props.postID}`)
+      .where("postID", "==", `${props.id}`)
       .orderBy("timestamp", "desc")
       .onSnapshot((snapshot) => {
         if (componentMounted) {
@@ -25,13 +27,16 @@ function Comment(props) {
       return () => {
         componentMounted = false;
       };
-  },);
+  },[props.id]);
+
+
   return (
     <div className="viewComments">
       {comments ? (
         <>
           {comments.map(({ id, comment }) => (
-              <CommentTabs id={id} comment={comment} key={id} />
+            
+              <CommentTabs id={id} comment={comment} key={id} postID={props.id}/>
           ))}
         </>
       ) : (

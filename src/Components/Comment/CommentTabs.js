@@ -7,12 +7,11 @@ import CommentReply from "./CommentReply";
 import Signin from "../Authentication/Signin";
 import { firestore } from "../../Firebase";
 import ReplyMenu from "./ReplyMenu";
-function CommentTabs({ id, comment }) {
+function CommentTabs({ id, comment,postID}) {
   const [view, setView] = useState(false);
   const { currentUser } = useAuth();
-
   const [replys, setReplys] = useState([]);
-
+ 
     useEffect(() => {
       let componentMounted = true;
         firestore
@@ -31,7 +30,7 @@ function CommentTabs({ id, comment }) {
           return () => {
             componentMounted = false;
           };
-      }, );
+      },[id]);
     
 
   const handleClick = () => {
@@ -51,7 +50,8 @@ function CommentTabs({ id, comment }) {
         </div>
 
         <div className="commentmenudiv">
-          <BiReply className="comment-menu reply_icon" onClick={handleClick} />
+        {currentUser ? 
+          <BiReply className="comment-menu reply_icon" onClick={handleClick} /> : <></>}
 
           {currentUser && currentUser.uid === comment.uid ? (
             <>
@@ -79,7 +79,7 @@ function CommentTabs({ id, comment }) {
      
                {currentUser && currentUser.uid === reply.uid ? (
                  <>
-                   <ReplyMenu docid={id} />
+                   <ReplyMenu docid={id} postID={postID}/>
                  </>
                ) : (
                  <></>
@@ -98,12 +98,9 @@ function CommentTabs({ id, comment }) {
           <>
             <div className="postReplySection">
               {currentUser ? (
-                <CommentReply id={id} setView={setView} />
+                <CommentReply id={id} setView={setView} postID={postID} />
               ) : (
                 <>
-                  {" "}
-                  <Signin />
-                  <p className="signInPost">to Reply</p>
                 </>
               )}
             </div>

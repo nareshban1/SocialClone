@@ -17,10 +17,12 @@ const Blogitem = ({ post, id }) => {
   const [likes, setLikes] = useState(0);
   const [docID, setDOCID] = useState("");
   const [liked, setLiked] = useState(false);
+ 
 
   const handleClick = () => {
     setView(!view);
   };
+
 
   const handleLike = () => {
     if (liked === false) {
@@ -74,6 +76,9 @@ const Blogitem = ({ post, id }) => {
           });
       }
     };
+
+  
+
     checkLiked();
     getLikeDocs();
     return () => {
@@ -174,7 +179,7 @@ const Blogitem = ({ post, id }) => {
                   </>
                 )}
               </div>
-              <Comment postID={id}/>
+              <Comment id={id} />
             </>
           ) : (
             <></>

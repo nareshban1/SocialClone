@@ -62,7 +62,7 @@ function Navbar(props) {
                   <img
                     className="navprofileimg"
                     src={currentUser.photoURL}
-                    alt="Profile"
+                    alt=""
                   ></img>
                 </Link>
                 </li>

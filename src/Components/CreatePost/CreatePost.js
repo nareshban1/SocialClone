@@ -17,6 +17,31 @@ function CreatePost() {
     const [error, setError] = useState(null);
 
     
+    const [inputerr,setInputErr] = useState("");
+
+    const validation = () =>{
+        const inputerr ={};
+        let isValid = true;
+
+        if(caption == "a"){
+          inputerr.captionNull = "Caption required"
+          isValid=false;
+        } 
+
+        if(caption.trim().length < 10 && caption.trim().length > 0){
+          inputerr.captionShort = "Caption is too short, should be more than 10 characters"
+          isValid=false;
+      }
+
+        if(caption.trim().length > 50){
+          inputerr.captionLong = "Caption is too long, should be less than 50 characters"
+          isValid=false;
+      }
+
+      setInputErr(inputerr);
+      return isValid;
+    }
+
     const handleChange = (e) => {
         if (e.target.files[0]) {
           setImage(e.target.files[0]);
@@ -30,6 +55,8 @@ function CreatePost() {
     
       const handleUpload = (e) => {
         e.preventDefault();
+        const isValid = validation();
+        if(isValid){
         if (image) {
           const storageRef = storage.ref(`images/${image.name}`);
     
@@ -77,6 +104,7 @@ function CreatePost() {
           setCaption("");
           setText("");
         }
+      }
       };
 
 
@@ -90,7 +118,10 @@ function CreatePost() {
               <div className="postLoggedInForm">
                 <form onSubmit={handleUpload}>
                   <div>
-                    <input type="text" value={caption} onChange={(e) => setCaption(e.target.value)} className="createPostTitle" placeholder="Title" required></input>
+                    <input type="text" value={caption} onChange={(e) => {setCaption(e.target.value);}} className="createPostTitle" placeholder="Title" aria-required="true"></input>
+                    {Object.keys(inputerr).map((key) => {
+                      return <div style={{color:"crimson"}} key={key}>{inputerr[key]}</div>
+                    })}
                     <textarea
                       value={text}
                       onChange={(e) => setText(e.target.value)}

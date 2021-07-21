@@ -7,12 +7,9 @@ import { firestore } from '../../Firebase';
 
 function CommentMenu(props) {
     const [modal, setModal] = useState(false);
-    const [loading, setLoading]=useState(false);
     const deleteComment = async () => {
-        setLoading(true);
-        deleteUnused(props.docid)
+        deleteUnused(props.docid);
         await firestore.collection("comments").doc(props.docid).delete();
-        setLoading(false);
         
 
 
@@ -51,7 +48,7 @@ function CommentMenu(props) {
 
                     </div>
                     <div className="modal-footer">
-                    {loading? <><button className="confirmbtn" >Deleting</button> </> :<> <button className="confirmbtn" onClick={deleteComment}>Confirm Delete</button> </>}
+                    <button className="confirmbtn" onClick={deleteComment}>Confirm Delete</button>
                         <button className="cancelbtn " onClick={closeModal}>Cancel</button>
                     </div>
                 </div>

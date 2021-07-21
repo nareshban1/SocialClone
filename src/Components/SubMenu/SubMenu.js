@@ -37,6 +37,15 @@ function SubMenu(props) {
             likebatch.delete(doc.ref);
         });
         await likebatch.commit();
+
+        const unusedReplys = await firestore.collection('replys').where("postId", "==", `${id}`).get()
+        const replybatch = firestore.batch();
+        unusedReplys.forEach(doc => {
+            replybatch.delete(doc.ref);
+        });
+        await replybatch.commit();
+
+        
     }
 
     const openModal = () => {

@@ -10,10 +10,7 @@ function Replymenu(props) {
     const [loading, setLoading]=useState(false);
     
     const deleteReply = async () => {
-        setLoading(true);
-        console.log("deleting");
         await firestore.collection("replys").doc(props.docid).delete();
-        setLoading(false);
     }
 
     const openModal = () => {
