@@ -142,7 +142,7 @@ function Profile() {
                 {following.length>0  ? (
                   <>
                     {following.map(({ id, followingUser }) => (
-                      <Link className="displayFollowing" to={{ pathname: 'userprofile/'+followingUser.uid, state: followingUser.followingID }} key={id}>
+                      <Link className="displayFollowing" to={{ pathname: 'userprofile/'+followingUser.followingUserName, state: followingUser.followingID }} key={id}>
                         <img
                           className="followprofileimg"
                           src={followingUser.followingUserPic}
@@ -165,16 +165,16 @@ function Profile() {
             >
               <h3>Follower List</h3>
               <div className="following">
-                {following.length>0  ? (
+                {followers.length>0  ? (
                   <>
                     {followers.map(({ id, user }) => (
-                      <Link className="displayFollowing" to={{ pathname: 'userprofile/'+user.uid, state: user.followingID }} key={id}>
+                      <Link className="displayFollowing" to={{ pathname: 'userprofile/'+user.followingID, state: user.followingID }} key={id}>
                         <img
                           className="followprofileimg"
-                          src={user.followingUserPic}
+                          src={user.followerPic}
                           alt="Profile"
                         ></img>
-                        <h4>{user.followingUserName}</h4>
+                        <h4>{user.followerName}</h4>
                       </Link>
                     ))}
                   </>

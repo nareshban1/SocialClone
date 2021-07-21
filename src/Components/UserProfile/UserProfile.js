@@ -23,7 +23,7 @@ function UserProfile(props) {
         followingUserName:user.displayName,
         uid: currentUser.uid,
         followerPic:currentUser.displayName,
-        followerName: currentUser.currentUser.photoURL,
+        followerName: currentUser.photoURL,
       }).then(docRef => {
         setDOCID( docRef.id);
     });
