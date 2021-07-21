@@ -22,8 +22,8 @@ function UserProfile(props) {
         followingUserPic:user.photoUrl,
         followingUserName:user.displayName,
         uid: currentUser.uid,
-        followerPic:currentUser.displayName,
-        followerName: currentUser.photoURL,
+        followerPic:currentUser.photoURL,
+        followerName:currentUser.displayName,
       }).then(docRef => {
         setDOCID( docRef.id);
     });

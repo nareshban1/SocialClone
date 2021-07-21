@@ -17,6 +17,7 @@ function Profile() {
   const {following,followers} = useMain();
   const [isMounted, setIsMounted] = useState(true);
   const [showFollow, setShowFollow] = useState(false);
+  const [showFollowers, setShowFollowers] = useState(false);
 
   useEffect(() => {
     setIsMounted(true);
@@ -125,12 +126,24 @@ function Profile() {
                 <p>
                   Following:<span>{following.length}</span> 
                 </p>
+                <div className="viewbtns">
                 <button
                   className="showFollow "
-                  onClick={() => setShowFollow(!showFollow)}
+                  onClick={() => {setShowFollow(!showFollow); if(showFollowers){
+                    setShowFollowers(!showFollowers);
+                  }}}
                 >
                   Show Following
                 </button>
+                <button
+                  className="showFollow "
+                  onClick={() => {setShowFollowers(!showFollowers); if(showFollow){
+                    setShowFollow(!showFollow);
+                  }}}
+                >
+                  Show Followers
+                </button>
+                </div>
               </div>
             </div>
             <div
@@ -160,7 +173,7 @@ function Profile() {
               </div>
             </div>
             <div
-              className={`${showFollow ? "followingList activef" : "followingList"
+              className={`${showFollowers ? "followingList activef" : "followingList"
                 }`}
             >
               <h3>Follower List</h3>
@@ -168,7 +181,7 @@ function Profile() {
                 {followers.length>0  ? (
                   <>
                     {followers.map(({ id, user }) => (
-                      <Link className="displayFollowing" to={{ pathname: 'userprofile/'+user.followingID, state: user.followingID }} key={id}>
+                      <Link className="displayFollowing" to={{ pathname: 'userprofile/'+user.followerName, state: user.uid }} key={id}>
                         <img
                           className="followprofileimg"
                           src={user.followerPic}
