@@ -12,8 +12,9 @@ import { useMain } from "../../context/MainContext";
 function Profile() {
   const [posts, setPosts] = useState([]);
   const { currentUser } = useAuth();
-  const [followers, setFollowers] = useState(0);
-  const {following} = useMain();
+
+  const [followerUser, setFollowersUser] = useState([]);
+  const {following,followers} = useMain();
   const [isMounted, setIsMounted] = useState(true);
   const [showFollow, setShowFollow] = useState(false);
 
@@ -21,7 +22,7 @@ function Profile() {
     setIsMounted(true);
     if (currentUser) {
       getCurrentUserPosts();
-      getFollowers();
+      
 
     }
     return () => {
@@ -47,16 +48,16 @@ function Profile() {
       });
   };
 
-  const getFollowers = async () => {
-    await firestore
-      .collection("follows")
-      .where("followingID", "==", `${currentUser.uid}`)
-      .onSnapshot((snapshot) => {
-        if (isMounted) {
-          setFollowers(snapshot.docs.length);
-        }
-      });
-  };
+  // const getFollowers = async () => {
+  //   await firestore
+  //     .collection("follows")
+  //     .where("followingID", "==", `${currentUser.uid}`)
+  //     .onSnapshot((snapshot) => {
+  //       if (isMounted) {
+  //         setFollowers(snapshot.docs.length);
+  //       }
+  //     });
+  // };
 
   
 
@@ -119,7 +120,10 @@ function Profile() {
                   Joined Date<span>{currentUser.metadata.creationTime}</span>
                 </p>
                 <p>
-                  Followers:<span>{followers}</span>
+                  Followers:<span>{followers.length}</span>
+                </p>
+                <p>
+                  Following:<span>{following.length}</span> 
                 </p>
                 <button
                   className="showFollow "
@@ -147,15 +151,36 @@ function Profile() {
                         <h4>{followingUser.followingUserName}</h4>
                       </Link>
                     ))}
-
-
-
-
-
                   </>
                 ) : (
                   <>
                     <p>You do not follow anyone.</p>
+                  </>
+                )}
+              </div>
+            </div>
+            <div
+              className={`${showFollow ? "followingList activef" : "followingList"
+                }`}
+            >
+              <h3>Follower List</h3>
+              <div className="following">
+                {following.length>0  ? (
+                  <>
+                    {followers.map(({ id, user }) => (
+                      <Link className="displayFollowing" to={{ pathname: 'userprofile/'+user.uid, state: user.followingID }} key={id}>
+                        <img
+                          className="followprofileimg"
+                          src={user.followingUserPic}
+                          alt="Profile"
+                        ></img>
+                        <h4>{user.followingUserName}</h4>
+                      </Link>
+                    ))}
+                  </>
+                ) : (
+                  <>
+                    <p>No Followers.</p>
                   </>
                 )}
               </div>

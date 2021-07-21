@@ -1,6 +1,6 @@
 import React from "react";
 import "./Blogitem.css";
-import { FacebookShareButton, FacebookIcon} from "react-share";
+import { FacebookShareButton, FacebookIcon,} from "react-share";
 import { AiOutlineShareAlt } from "react-icons/ai";
 
 export default function Share({id}) {

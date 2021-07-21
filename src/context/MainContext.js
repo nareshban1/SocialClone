@@ -11,6 +11,7 @@ export const useMain = () => {
 export const MainContextProvider = (props) => {
     const { currentUser } = useAuth();
     const [following, setFollowing] = useState([]);
+    const [followers, setFollowers] = useState([]);
     const [isMounted, setIsMounted] = useState(true);
 
     const getFollowing = async () => {
@@ -33,18 +34,41 @@ export const MainContextProvider = (props) => {
                 }
             })
     }
+    const getFollowers = async () => {
+        await firestore.collection("follows")
+        .where("followingID", "==", `${currentUser.uid}`)
+            .onSnapshot((snapshot) => {
+                if (snapshot.empty) {
+                    if (isMounted) {
+                        setFollowers([]);
+                    }
+                } else {
+                    if (isMounted) {
+                        setFollowers(
+                            snapshot.docs.map((doc) => ({
+                                id: doc.id,
+                                user: doc.data(),
+                            }))
+                        );
+                    }
+                }
+            })
+    }
+
 
     const value = {
         following,
+        followers,
     }
 
 
         ;
     useEffect(() => {
         setIsMounted(true);
-        if(currentUser){
-        getFollowing();
-        }
+            if(currentUser){
+            getFollowing();
+            getFollowers();
+            }
 
         return () => {
             setIsMounted(false);

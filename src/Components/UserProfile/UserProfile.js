@@ -13,6 +13,7 @@ function UserProfile(props) {
   const [followStatus, setFollowStatus] = useState(false);
   const [docID, setDOCID] = useState("");
   const [followers, setFollowers] = useState(0);
+  const [following, setFollowing] = useState(0);
 
   const changeStatus = async() => {
     if (followStatus === false && user) {
@@ -21,6 +22,8 @@ function UserProfile(props) {
         followingUserPic:user.photoUrl,
         followingUserName:user.displayName,
         uid: currentUser.uid,
+        followerPic:currentUser.displayName,
+        followerName: currentUser.currentUser.photoURL,
       }).then(docRef => {
         setDOCID( docRef.id);
     });
@@ -87,6 +90,18 @@ function UserProfile(props) {
                 }
               });
         }
+
+        const getFollowing = async () => {
+          await firestore
+              .collection("follows")
+              .where("uid", "==", `${props.location.state}`)
+              .onSnapshot((snapshot) => {
+                if (componentMounted) {
+                  setFollowing(snapshot.docs.length);
+                }
+              });
+        }
+
         const getFollowStatus = async () => {
             if (currentUser) {
               await firestore
@@ -116,6 +131,7 @@ function UserProfile(props) {
       getUserData();
       getUserPosts();
       getFollowStatus();
+      getFollowing();
     
     return () => {
         componentMounted = false;
@@ -164,7 +180,12 @@ function UserProfile(props) {
                   Last Seen<span>{user.lastsignin}</span>
                 </p>
                 <p>
-                  Followers:<span>{followers}</span>
+                  Followers:<span>{followers}</span> 
+            
+                </p>
+                <p>
+     
+                  Following:<span>{following}</span> 
                 </p>
                 {currentUser ? (
                   <button className="follow" onClick={changeStatus}>
