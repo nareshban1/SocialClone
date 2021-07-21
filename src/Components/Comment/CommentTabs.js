@@ -14,9 +14,7 @@ function CommentTabs({ id, comment,postID}) {
  
     useEffect(() => {
       let componentMounted = true;
-        firestore
-          .collection("replys").where("commentID","==",`${id}`)
-          .onSnapshot((snapshot) => {
+        firestore.collection("replys").where("commentID","==",`${id}`).orderBy('timestamp', "asc").onSnapshot((snapshot) => {
             if (componentMounted) {
               setReplys(
                 snapshot.docs.map((doc) => ({
