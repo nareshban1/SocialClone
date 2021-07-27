@@ -171,9 +171,6 @@ function UserProfile(props) {
               <p className="profilename">{user.displayName}</p>
               <div className="otherinfo">
                 <p>
-                  Email<span> {user.email} </span>
-                </p>
-                <p>
                   Joined Date<span>{user.created}</span>
                 </p>
                 <p>
