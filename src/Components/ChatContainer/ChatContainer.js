@@ -6,7 +6,7 @@ import MessageContainer from "../MessageContainer/MessageContainer";
 
 function ChatContainer() {
   const { currentUser } = useAuth();
-  const [openChat, setOpenChat] = useState(true);
+  const [openChat, setOpenChat] = useState(false);
 
 
   const handleClick = () => {
