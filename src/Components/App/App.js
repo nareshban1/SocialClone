@@ -12,6 +12,8 @@ import Post from "../Postview/Post";
 import UserProfile from "../UserProfile/UserProfile";
 import { MainContextProvider } from "../../context/MainContext";
 
+import ChatiIcon from "../ChatIcon/ChatiIcon";
+import ChatContainer from "../ChatContainer/ChatContainer";
 
 
 
@@ -33,6 +35,7 @@ function App() {
               <Route path="/userprofile" component={UserProfile} />
               <Route path="/post/:id" component={Post} />
             </Switch>
+            <ChatContainer/>
           </div>
         </div>
         </ThemeProvider>

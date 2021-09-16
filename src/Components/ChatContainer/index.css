@@ -1,0 +1,30 @@
+.chatcontainer{
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    margin: 10px;
+    border-radius: 8px;
+    box-sizing: border-box;
+    overflow: hidden;
+    min-height: 70px;
+    min-width: 70px;
+}
+
+  
+
+  @media only screen and (max-width: 415px) {
+    .chatcontainer{
+        margin:0px;
+    }
+    
+    .chatlistcontainer{
+        height: 500px;
+        width: 100vw;
+        
+       
+    }
+    .chat{
+        margin: 10px;
+    }
+
+  }

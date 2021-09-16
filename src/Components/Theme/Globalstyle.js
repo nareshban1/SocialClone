@@ -21,7 +21,13 @@ body {
 }
 
 
-.createPostTitle , .createPostInput,.profile,.postformsection,.postCommentSection{
+.createPostTitle , .createPostInput,.profile,.postformsection,.postCommentSection,.chatInputForm{
+  background-color: ${({ theme }) => theme.background};
+  color:${({ theme }) => theme.text};
+  transition: all 0.50s linear;
+}
+
+.chatInputForm,.chatinput{
   background-color: ${({ theme }) => theme.background};
   color:${({ theme }) => theme.text};
   transition: all 0.50s linear;
@@ -74,4 +80,17 @@ body {
   color:${({ theme }) => theme.text};
   transition: all 0.50s linear;
 }
+
+.chatlistcontainer{
+  background-color: ${({ theme }) => theme.mainbackground};
+  color:${({ theme }) => theme.text};
+  transition: all 0.50s linear;
+}
+
+.chatlistheader{
+  background-color: ${({ theme }) => theme.lightback};
+  color:${({ theme }) => theme.text};
+  transition: all 0.50s linear;
+}
+
   `

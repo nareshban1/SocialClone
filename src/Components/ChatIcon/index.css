@@ -1,0 +1,16 @@
+.chat{
+    position: absolute;
+    background-color: var(--primary-color);
+    bottom: 0;
+    right: 0;
+    display: grid;
+    place-items: center;
+    border-radius: 50%;
+    box-sizing: border-box;
+    padding: 1rem;
+}
+
+.chaticon{
+  font-size: 1.5rem;
+    
+}
