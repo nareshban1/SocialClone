@@ -19,7 +19,7 @@ import RouteChangeTracker from '../../service/RouteChangeTracker'
 
 function App() {
   const [theme, themeToggler] = useDarkMode();
-  const TRACKING_ID = "UA-12341234-1"; // YOUR_OWN_TRACKING_ID
+  const TRACKING_ID = "UA-216007386-1"; // YOUR_OWN_TRACKING_ID
   ReactGA.initialize(TRACKING_ID);
 
   const themeMode = theme === 'light' ? lightTheme : darkTheme;
